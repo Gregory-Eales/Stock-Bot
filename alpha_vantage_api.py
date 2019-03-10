@@ -23,11 +23,18 @@ class AlphaVantageAPI(object):
         df = pd.read_csv(self._example_link)
         return df
 
-    def _create_link(self, func, ticker, interval, output_size="compact", dtype="csv"):
+    def _create_intraday_link(self, func, ticker, interval, output_size="compact", dtype="csv"):
         self._check_interval(interval)
         link = self._link_main + func + self._link_symbol + ticker + self._link_interval + interval + \
                self._link_output + output_size + self._link_key + self._api_key + self._link_dtype + dtype
         return link
+
+    def _create_daily_link(self, ticker, output_size="compact", dtype="csv"):
+        func = "TIME_SERIES_DAILY"
+        link = self._link_main + func + self._link_symbol + ticker + self._link_output +\
+               output_size + self._link_key + self._api_key + self._link_dtype + dtype
+        return link
+
 
     @staticmethod
     def _check_interval(interval):
@@ -38,13 +45,13 @@ class AlphaVantageAPI(object):
     def fetch_intraday(self, ticker, interval, output_size="compact", dtype="csv"):
         func = "TIME_SERIES_INTRADAY"
         self._check_interval(interval)
-
-        link = self._create_link(func, ticker, interval, output_size, dtype)
+        link = self._create_intraday_link(func, ticker, interval, output_size, dtype)
         df = pd.read_csv(link)
         return df
 
-    def fetch_daily(self):
-
+    def fetch_daily(self, ticker, output_size="compact", dtype="csv"):
+        func = "TIME_SERIES_DAILY"
+        link = self._create_daily_link(ticker, output_size, dtype)
         df = pd.read_csv(link)
         return df
 
