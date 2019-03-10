@@ -8,4 +8,4 @@ fetcher = AlphaVantageAPI(api_key=my_api_key)
 
 df = fetcher.fetch_example()
 
-print(df.head(5))
+print(df.head(1))
