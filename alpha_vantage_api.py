@@ -35,6 +35,24 @@ class AlphaVantageAPI(object):
                output_size + self._link_key + self._api_key + self._link_dtype + dtype
         return link
 
+    def _create_weekly_link(self, ticker, dtype="csv"):
+        func = "TIME_SERIES_WEEKLY"
+        link = self._link_main + func + self._link_symbol + ticker + \
+               self._link_key + self._api_key + self._link_dtype + dtype
+        return link
+
+    def _create_monthly_link(self, ticker, dtype="csv"):
+        func = "TIME_SERIES_MONTHLY"
+        link = self._link_main + func + self._link_symbol + ticker + \
+               self._link_key + self._api_key + self._link_dtype + dtype
+        return link
+
+    def _create_endpoint_link(self, ticker, dtype="csv"):
+        func = "GLOBAL_QUOTE"
+        link = self._link_main + func + self._link_symbol + ticker + \
+               self._link_key + self._api_key + self._link_dtype + dtype
+        return link
+
 
     @staticmethod
     def _check_interval(interval):
@@ -55,17 +73,17 @@ class AlphaVantageAPI(object):
         df = pd.read_csv(link)
         return df
 
-    def fetch_weekly(self):
-
+    def fetch_weekly(self, ticker, dtype="csv"):
+        link = self._create_weekly_link(ticker, dtype)
         df = pd.read_csv(link)
         return df
 
-    def fetch_monthly(self):
-
+    def fetch_monthly(self, ticker, dtype="csv"):
+        link = self._create_monthly_link(ticker, dtype)
         df = pd.read_csv(link)
         return df
 
-    def fetch_quote_endpoint(self):
-
+    def fetch_quote_endpoint(self, ticker, dtype="csv"):
+        link = self._create_endpoint_link(ticker, dtype)
         df = pd.read_csv(link)
         return df
