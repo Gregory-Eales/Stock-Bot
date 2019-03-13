@@ -12,4 +12,4 @@ fetcher = AlphaVantageAPI(api_key=my_api_key)
 #df = fetcher.fetch_monthly("MSFT")
 df = fetcher.fetch_quote_endpoint("AQB")
 
-print(df)
+print(df.keys())

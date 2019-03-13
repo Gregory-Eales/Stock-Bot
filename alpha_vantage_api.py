@@ -53,7 +53,6 @@ class AlphaVantageAPI(object):
                self._link_key + self._api_key + self._link_dtype + dtype
         return link
 
-
     @staticmethod
     def _check_interval(interval):
         intervals = ["1min", "5min", "15min", "30min", "60min"]
@@ -76,7 +75,7 @@ class AlphaVantageAPI(object):
     def fetch_weekly(self, ticker, dtype="csv"):
         link = self._create_weekly_link(ticker, dtype)
         df = pd.read_csv(link)
-        return df
+        return df["price"]
 
     def fetch_monthly(self, ticker, dtype="csv"):
         link = self._create_monthly_link(ticker, dtype)
