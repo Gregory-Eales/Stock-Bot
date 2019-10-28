@@ -1,8 +1,8 @@
 import torch
+import numpy as np
 import pyetrade
 from pyetrade import ETradeAccessManager, ETradeAccounts, ETradeMarket
 from pyetrade import ETradeOAuth, ETradeOrder
-from pyetrade import
 
 class StockBot(object):
 
@@ -37,8 +37,5 @@ class StockBot(object):
     def sell(self, ticker, amount):
         pass
 
-    def get_data(self, ticker, amount):
-        pass
-
-    def trade(self):
-        pass
+    def get_quote(self, ticker):
+        return self.market.get_quote(ticker)
