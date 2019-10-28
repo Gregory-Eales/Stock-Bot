@@ -4,6 +4,8 @@ import pyetrade
 from pyetrade import ETradeAccessManager, ETradeAccounts, ETradeMarket
 from pyetrade import ETradeOAuth, ETradeOrder
 
+from value_network import ValueNetwork
+
 class StockBot(object):
 
     def __init__(self, credential_path):
@@ -25,7 +27,9 @@ class StockBot(object):
          resource_owner_key=rok, resource_owner_secret=ros)
 
         self.oauth = ETradeOAuth(consumer_key=ck,
-         consumer_secret=cs, callback_url='oob')
+         consumer_secret=cs, callback_url='oob
+
+        self.value_network = ValueNetwork()
 
     def get_credentials(self, filename):
         pass
