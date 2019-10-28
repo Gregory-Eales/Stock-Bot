@@ -6,24 +6,26 @@ from pyetrade import ETradeOAuth, ETradeOrder
 
 class StockBot(object):
 
-    def __init__(self):
+    def __init__(self, credential_path):
 
-        self.client_key = None
-        self.client_secret = None
-        self.resource_owner_key = None
-        self.resource_owner_secret = None
+        ck, cs, rok, ros = self.get_credentials(filename=credential_path)
 
-        self.access_manager = ETradeAccessManager(client_key=,
-         client_secret=, resource_owner_key=, resource_owner_secret=)
+        self.client_key = ck
+        self.client_secret = cs
+        self.resource_owner_key = rok
+        self.resource_owner_secret = ros
 
-        self.acounts = ETradeAccounts(client_key=,
-         client_secret=, resource_owner_key=, resource_owner_secret=)
+        self.access_manager = ETradeAccessManager(client_key=ck,
+         client_secret=cs, resource_owner_key=rok, resource_owner_secret=ros)
 
-        self.market = ETradeMarket(client_key=, client_secret=,
-         resource_owner_key=, resource_owner_secret=)
+        self.acounts = ETradeAccounts(client_key=ck,
+         client_secret=cs, resource_owner_key=rok, resource_owner_secret=ros)
 
-        self.oauth = ETradeOAuth(consumer_key=,
-         consumer_secret=, callback_url='oob')
+        self.market = ETradeMarket(client_key=ck, client_secret=cs,
+         resource_owner_key=rok, resource_owner_secret=ros)
+
+        self.oauth = ETradeOAuth(consumer_key=ck,
+         consumer_secret=cs, callback_url='oob')
 
     def get_credentials(self, filename):
         pass
