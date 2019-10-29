@@ -1,3 +1,4 @@
 
 stock_bot/key.txt
 credentials.txt
+*.pyc
