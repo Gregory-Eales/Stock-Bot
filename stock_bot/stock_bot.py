@@ -1,41 +1,22 @@
 import torch
 import numpy as np
-import pyetrade
-from pyetrade import ETradeAccessManager, ETradeAccounts, ETradeMarket
-from pyetrade import ETradeOAuth, ETradeOrder
 
+from etrade_api import Etrader
 from value_network import ValueNetwork
+from evaluation_network import EvaluationNetwork
+from policy_network import PolicyNetwork
 
 class StockBot(object):
 
     def __init__(self, credential_path):
 
-        ck, cs, rok, ros = self.get_credentials(filename=credential_path)
+        # define api handler
+        self.etrader = Etrader(credential_path=credential_path)
 
-        self.client_key = ck
-        self.client_secret = cs
-        self.resource_owner_key = rok
-        self.resource_owner_secret = ros
-
-        self.access_manager = ETradeAccessManager(client_key=ck,
-         client_secret=cs, resource_owner_key=rok, resource_owner_secret=ros)
-
-        self.acounts = ETradeAccounts(client_key=ck,
-         client_secret=cs, resource_owner_key=rok, resource_owner_secret=ros)
-
-        self.market = ETradeMarket(client_key=ck, client_secret=cs,
-         resource_owner_key=rok, resource_owner_secret=ros)
-
-        self.oauth = ETradeOAuth(consumer_key=ck,
-         consumer_secret=cs, callback_url='oob
-
-        self.value_network = ValueNetwork()
-
-    def get_credentials(self, filename):
-        pass
-
-    def login(self):
-        pass
+        # define networks
+        self.eval_net = PolicyNetwork()
+        self.value_net = EvaluationNetwork()
+        self.policy_net = PolicyNetwork()
 
     def buy(self, ticker, amount):
         pass
