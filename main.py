@@ -1,5 +1,13 @@
-from stock_bot.stock_bot import StockBot
+import finnhub
+
+from gui.app import MainWindow
 
 
 
-stock_bot = StockBot(credential_path="stock_bot/sandbox_key.txt")
+
+
+if __name__ == "__main__":
+
+	window = MainWindow()
+
+	window.run()
