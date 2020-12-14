@@ -4,12 +4,22 @@ from flask import render_template
 from base64 import b64encode
 import pandas as pd
 from matplotlib import pyplot as plt
+from flask_sqlalchemy import SQLAlchemy
 
 from bot import *
+
 
 bot = Bot(path="./bot/credentials.txt")
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///posts.db"
+
+db = SQLAlchemy(app)
+
+class Stock(db.Model):
+	ticker = db.Column(db.String, primary_key=True)
+	name = db.Column(db.String)
+
 
 @app.route('/')
 def overview():
@@ -40,6 +50,14 @@ def settings():
 def positions():
 	positions = bot.get_positions()
 	return render_template('positions.html')
+
+
+@app.route('/graph')
+def graph():
+	positions = bot.get_positions()
+	return render_template('graph.html')
+
+
 
 @app.route('/plot/<ticker>')
 def plot(ticker):

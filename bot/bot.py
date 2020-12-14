@@ -28,7 +28,12 @@ class Bot(object):
 		self.update_account()
 
 		data = []
-		data.append(self.account)
+		data.append(self.account._raw)
+		data.append(self.api.polygon.exchanges())
+
+		print(self.api.polygon.company("MSFT"))
+
+		#print(data[1])
 
 		return data
 		

@@ -4,18 +4,70 @@
 
 {% block body %}
 
-<h1> Overview </h1>
+<header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i> Account Overveiw </b></h5>
+  </header>
 
-{{data}}
+<div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter">
+      <div class="w3-container w3-red w3-padding-16">
+        <div class="w3-left">
+          <h3>Account Number:</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>{{data[0]['account_number']}}</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left">
+          <h3>Account Status: </h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>{{data[0]['status']}}</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-teal w3-padding-16">
+        <div class="w3-left">
+          <h3>Cash Balance:</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4> ${{data[0]['cash']}} </h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-orange w3-text-white w3-padding-16">
+        <div class="w3-left">
+          <h3>Portfolio Value:</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4> ${{data[0]['portfolio_value']}}</h4>
+      </div>
+    </div>
+  </div>
 
-<h3> Account Number: {{data[0]['account_number']}} </h3>
+<div class="w3-panel">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-twothird">
+        <h5> Exchanges </h5>
+        <table class="w3-table w3-striped w3-white">
+          
+          {% for i in data[1]%}
 
-<h3> Account Status: {{data[0]['status']}} </h3>
+	          <tr>
+	            <td><i class="fa fa-bank w3-text-blue fa-fw"></i></td>
+	            <td>{{i['name']}}</td>
+	            <td><i>{{i['market']}}</i></td>
+	            <td><i>{{i['code']}}</i></td>
+	          </tr>
 
-<h3> Cash Balance: ${{data[0]['cash']}} </h3>
-
-<h3> Portfolio Value: ${{data[0]['portfolio_value']}} </h3>
-
+	      {% endfor %}
+          
+        </table>
+      </div>
+    </div>
+  </div>
 
 
 {% endblock %}
